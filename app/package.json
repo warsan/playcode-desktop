@@ -2,7 +2,7 @@
     "name": "playcode",
     "productName": "PlayCode",
     "version": "1.7.4",
-    "description": "Desktop client for Playcode Online Javascript Editor",
+    "description": "Настольный клиент для Playcode Online Javascript Editor",
     "private": false,
     "main": "main.js",
     "author": {

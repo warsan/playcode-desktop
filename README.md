@@ -2,16 +2,16 @@
 <img align="left" width="0" height="192px" hspace="10"/>
 
 # Playcode
-> Desktop client for Playcode Online Javascript Editor
+> Настольный клиент для Playcode Online Javascript Editor
 
 </br>
 </br>
 
-## Screenshots
+## Скриншоты
 
 [<img alt='Playcode' src="https://github.com/playcode/playcode-desktop/blob/master/build/Screenshot.png?raw=true">](https://github.com/playcode/playcode/releases)
 
-## Development
+## Развитие
 
 ```
 $ git clone https://github.com/playcode/playcode-desktop.git
@@ -21,7 +21,7 @@ $ npm start
 $ npm run dist
 ```
 
-## License
+## Лицензия
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

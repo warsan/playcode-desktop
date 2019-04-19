@@ -16,22 +16,22 @@ describe('App Testing:', function () {
 
     it('Window Tests', () => {
         app.start().then(() => {
-            // Check if the window is visible
+            // Проверьте, видно ли окно
             return app.browserWindow.isVisible()
         }).then(isVisible => {
-            // Verify the window is visible
+            // Убедитесь, что окно видно
             assert.equal(isVisible, true)
         }).then(() => {
-            // Get the window's title
+            // Получить заголовок окна
             return app.client.getTitle()
         }).then(title => {
-            // Verify the window's title
+            // Проверьте заголовок окна
             assert.equal(title, 'Playcode')
         }).then(() => {
-            // Stop the application
+            // Остановить приложение
             return app.stop()
         }).catch(err => {
-            // Log any failures
+            // Журнал любых сбоев
             console.err('Test failed', err.message)
         })
     })

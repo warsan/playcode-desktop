@@ -14,16 +14,16 @@ const appTitle = app.getName()
 const appIsDev = require('electron-is-dev')
 const appConfig = require('./lib/config.js')
 
-// Right Click/Context menu contents
+// Правый клик/Содержимое контекстного меню
 require('electron-context-menu')()
 
-// Main App Window
+// Главное окно приложения
 let mainWindow
 
-// If the application is quitting
+// Если приложение выходит
 let isQuitting = false
 
-// Main Window
+// Главное окно
 function createMainWindow() {
 
   const lastWindowState = appConfig.get('lastWindowState')
@@ -46,7 +46,7 @@ function createMainWindow() {
   appView.loadURL('https://playcode.io')
   // appView.loadURL('http://localhost:5001')
 
-  // When window is closed, hide window
+  // Когда окно закрыто, скрыть окно
   appView.on('close', e => {
     if ( !isQuitting ) {
       e.preventDefault()
@@ -58,12 +58,12 @@ function createMainWindow() {
     }
   })
 
-  // Enter fullscreen Playcode fullscreen method execution
+  // Вход в полноэкранный режим воспроизведения для Playcode.
   appView.on('enter-full-screen', () => {
     appView.webContents.executeJavaScript('document.dispatchEvent( new Event("electronEnteredFullscreen") );')
   })
 
-  // Exit fullscreen Playcode fullscreen method execution
+  // Выход из полноэкранного режима Playcode.
   appView.on('leave-full-screen', () => {
     appView.webContents.executeJavaScript('document.dispatchEvent( new Event("electronLeavedFullscreen") );')
   })
@@ -76,10 +76,10 @@ app.on('ready', () => {
 
   mainWindow = createMainWindow()
 
-  // Setting App menu
+  // Настройка меню приложения
   menu.setApplicationMenu(require('./lib/menu.js'))
 
-  // If running in developer environment = Open developer tools
+  // Если работает в среде разработчика = Открыть инструменты разработчика
   if ( appIsDev ) {
     mainWindow.openDevTools()
   }
@@ -88,36 +88,36 @@ app.on('ready', () => {
 
   appPage.on('dom-ready', () => {
 
-    // Global Style Additions
+    // Глобальные дополнения стиля
     appPage.insertCSS(fs.readFileSync(path.join(__dirname, 'app.css'), 'utf8'))
 
-    // MacOS ONLY style fixes
+    // Исправления в стиле ТОЛЬКО для MacOS
     if ( process.platform === 'darwin' ) {
       appPage.insertCSS('')
     }
 
-    // Added app version to global code
+    // Добавка версии приложения в глобальном коде
     appPage.executeJavaScript(`window.electronAppVersion = '${version}';`)
 
-    // Global Code Additions
+    // Глобальные дополнения к коду
     appPage.executeJavaScript(fs.readFileSync(path.join(__dirname, 'renderer.js'), 'utf8'))
 
-    // Show the Main Window
+    // Показать главное окно
     mainWindow.show()
 
-    // Open external links in browser
+    // Открыть внешние ссылки в браузере
     appPage.on('new-window', ( e, url ) => {
       e.preventDefault()
       electron.shell.openExternal(url)
     })
 
-    // Shortcut to reload the page.
+    // Ярлык для перезагрузки страницы.
     // globalShortcut.register('CmdOrCtrl+R', (item, focusedWindow) => {
     //     if (focusedWindow) {
     //         mainWindow.webContents.reload()
     //     }
     // })
-    // Shortcut to go back a page.
+    // Ярлык, чтобы вернуться на страницу.
     // globalShortcut.register('Command+Left', ( item, focusedWindow ) => {
     //   if ( focusedWindow && focusedWindow.webContents.canGoBack() ) {
     //     focusedWindow.webContents.goBack()
@@ -125,7 +125,7 @@ app.on('ready', () => {
     //   }
     // })
 
-    // Navigate the window back when the user hits their mouse back button
+    // Навигация по окну назад, когда пользователь нажимает кнопку мыши назад
     mainWindow.on('app-command', ( e, cmd ) => {
       if ( cmd === 'browser-backward' && mainWindow.webContents.canGoBack() ) {
         mainWindow.webContents.goBack()
@@ -147,13 +147,13 @@ app.on('activate', () => {
 app.on('before-quit', () => {
   isQuitting = true
 
-  // Saves the current window position and window size to the config file.
+  // Сохраняет текущую позицию окна и размер окна в файле конфигурации.
   if ( !mainWindow.isFullScreen() ) {
     appConfig.set('lastWindowState', mainWindow.getBounds())
   }
 })
 
 app.on('will-quit', () => {
-  // Unregister all shortcuts.
+  // Отмена регистрации всех ярлыков.
   globalShortcut.unregisterAll()
 })

@@ -7,51 +7,51 @@ const appVersion = app.getVersion()
 const appMenu = electron.Menu
 
 const templateWin = [{
-    label: 'File',
+    label: 'Файл',
     submenu: [{
-        label: 'Hide ' + appName,
+        label: 'Скрыть ' + appName,
         accelerator: 'Control+H',
         role: 'hide'
     }, {
         type: 'separator'
     }, {
-        label: 'Quit',
+        label: 'Выход',
         accelerator: 'Control+W',
         role: 'close'
     }]
 }, {
     label: 'Edit',
     submenu: [{
-        label: 'Undo',
+        label: 'Назад',
         accelerator: 'Control+Z',
         role: 'undo'
     }, {
-        label: 'Redo',
+        label: 'Далее',
         accelerator: 'Shift+Control+Z',
         role: 'redo'
     }, {
         type: 'separator'
     }, {
-        label: 'Cut',
+        label: 'Вырезать',
         accelerator: 'Control+X',
         role: 'cut'
     }, {
-        label: 'Copy',
+        label: 'Копировать',
         accelerator: 'Control+C',
         role: 'copy'
     }, {
-        label: 'Paste',
+        label: 'Вставить',
         accelerator: 'Control+V',
         role: 'paste'
     }, {
-        label: 'Select All',
+        label: 'Выбрать все',
         accelerator: 'Control+A',
         role: 'selectall'
     }]
 }, {
-    label: 'View',
+    label: 'Смотреть',
     submenu: [{
-        label: 'Back',
+        label: 'Назад',
         accelerator: 'Backspace',
         click(item, focusedWindow) {
             if (focusedWindow && focusedWindow.webContents.canGoBack()) {

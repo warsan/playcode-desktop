@@ -1,4 +1,4 @@
-// System paths
+// Системные пути
 const path = require('path')
 const fs = require('fs')
 
@@ -8,7 +8,7 @@ const electron = require('electron')
 const globalShortcut = electron.globalShortcut
 const menu = electron.Menu
 
-// App Info
+// Информация о приложении
 const app = electron.app
 const appTitle = app.getName()
 const appIsDev = require('electron-is-dev')
